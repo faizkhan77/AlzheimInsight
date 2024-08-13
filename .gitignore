@@ -1,0 +1,21 @@
+# Ignore the Virtual Environment
+myworld/
+
+
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore other common files
+Notebook/
+test.py
+test2.py
+test3.py
+
+*.swp
+.idea/
+.vscode/
+
+vercel.json
+.env

@@ -1,0 +1,831 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>AlzheimInsight</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  <style>
+
+    /* loader */
+    /* From Uiverse.io by Bethel-nz */ 
+    .loader{
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        transition: opacity 0.75s, visibility 0.75s;
+        z-index: 99999;
+    }
+    .loader-hidden{
+        opacity: 0;
+        visibility: hidden;
+    }
+    .pl,
+    .pl__worm {
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+    }
+
+    .pl {
+      animation-name: bump9;
+      animation-timing-function: linear;
+      width: 8em;
+      height: 8em;
+    }
+
+    .pl__ring {
+      stroke: hsla(var(--hue),10%,10%,0.1);
+      transition: stroke 0.3s;
+    }
+
+    .pl__worm {
+      animation-name: worm9;
+      animation-timing-function: cubic-bezier(0.42,0.17,0.75,0.83);
+    }
+
+    /* Animations */
+    @keyframes bump9 {
+      from,
+      42%,
+      46%,
+      51%,
+      55%,
+      59%,
+      63%,
+      67%,
+      71%,
+      74%,
+      78%,
+      81%,
+      85%,
+      88%,
+      92%,
+      to {
+        transform: translate(0,0);
+      }
+
+      44% {
+        transform: translate(1.33%,6.75%);
+      }
+
+      53% {
+        transform: translate(-16.67%,-0.54%);
+      }
+
+      61% {
+        transform: translate(3.66%,-2.46%);
+      }
+
+      69% {
+        transform: translate(-0.59%,15.27%);
+      }
+
+      76% {
+        transform: translate(-1.92%,-4.68%);
+      }
+
+      83% {
+        transform: translate(9.38%,0.96%);
+      }
+
+      90% {
+        transform: translate(-4.55%,1.98%);
+      }
+    }
+
+    @keyframes worm9 {
+      from {
+        stroke-dashoffset: 10;
+      }
+
+      25% {
+        stroke-dashoffset: 295;
+      }
+
+      to {
+        stroke-dashoffset: 1165;
+      }
+    }
+
+
+
+
+    /* Social Icons */ 
+    ul {
+      list-style: none;
+    }
+
+    .example-2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .example-2 .icon-content {
+      margin: 0 10px;
+      position: relative;
+      padding: 0.5rem;
+    }
+    .example-2 .icon-content .tooltip {
+      position: absolute;
+      top: 100%;
+      right: 110%;
+      transform: translateY(200%);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 5px;
+      opacity: 0;
+      visibility: hidden;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .example-2 .icon-content:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      top: -50px;
+    }
+    .example-2 .icon-content a {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #4d4d4d;
+      background-color: #fff;
+      transition: all 0.3s ease-in-out;
+    }
+
+   
+
+    .example-2 .icon-content a:hover {
+      box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+    }
+    .example-2 .icon-content a svg {
+      position: relative;
+      z-index: 1;
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (max-width: 430px) {
+      .example-2 .icon-content a {
+        width: 40px;
+        height: 40px;
+        } 
+        .example-2 .icon-content a svg{
+          width: 25px;
+          height: 25px;
+        }
+    }
+    .example-2 .icon-content a:hover {
+      color: white;
+    }
+    .example-2 .icon-content a .filled {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: #000;
+      transition: all 0.3s ease-in-out;
+    }
+    .example-2 .icon-content a:hover .filled {
+      height: 100%;
+    }
+
+    .example-2 .icon-content a[data-social="linkedin"] .filled,
+    .example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+      background-color: #0274b3;
+    }
+
+    .example-2 .icon-content a[data-social="github"] .filled,
+    .example-2 .icon-content a[data-social="github"] ~ .tooltip {
+      background-color: #24262a;
+    }
+
+    .socials {
+      position: fixed; /* Keeps the element fixed on the screen */
+      bottom: 20px;    /* Positions the element 20px from the bottom */
+      right: 1px;     /* Positions the element 20px from the right */
+      z-index: 1000;   /* Ensures it stays on top of other elements */
+    }
+
+    /* ----------------------------------- */
+
+  </style>
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'images/logo.png' %}" alt="">
+            <span>
+              AlzheimInsight
+            </span>
+          </a>
+          
+
+
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="img-box">
+                    <img src="{% static 'images/medicine.png' %}" alt="">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="detail-box">
+                    <h1>
+                      Predicting Alzheimer's for a  <br>
+                      <span font-size: max(1vw, 7px)>
+                        Brighter Tomorrow
+                      </span>
+
+                    </h1>
+                    <p>
+                      At the forefront of innovation, our platform leverages advanced machine learning algorithms to predict the likelihood of Alzheimer's Disease, empowering individuals and healthcare professionals with crucial insights. By analyzing a comprehensive dataset of health information, we aim to facilitate early detection and intervention, enhancing the quality of life for patients and their families. Join us in our mission to combat Alzheimer's and create a brighter, healthier tomorrow.
+                    </p>
+                    <div>
+                      <a href="{% url 'modelform' %}">
+                        Start Diagnosis
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="img-box">
+                    <img src="{% static 'images/medicine.png' %}" alt="">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="detail-box">
+                    <h1>
+                      Empowering Early Detection of <br>
+                      <span font-size: max(1vw, 7px)>
+                        Alzheimer's
+                      </span>
+
+                    </h1>
+                    <p>
+                      Our cutting-edge platform utilizes sophisticated machine learning techniques to empower early detection of Alzheimer's Disease. By analyzing extensive health data, we provide valuable predictions that enable timely interventions and informed decision-making. 
+                    </p>
+                    <div>
+                      <a href="{% url 'modelform' %}">
+                        Start Diagnosis
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="img-box">
+                    <img src="{% static 'images/medicine.png' %}" alt="">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="detail-box">
+                    <h1>
+                      Transforming Alzheimer's Diagnosis <br>
+                      <span font-size: max(1vw, 7px)>
+                        with Data
+                      </span>
+
+                    </h1>
+                    <p>
+                      Harnessing the power of data, our innovative platform transforms the approach to diagnosing Alzheimer's Disease. With the aid of advanced predictive models, we analyze a wealth of patient information to identify early signs and risk factors.
+                    </p>
+                    <div>
+                      <a href="{% url 'modelform' %}">
+                        Start Diagnosis
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <section class="feature_section  layout_padding">
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+          <div class="row gx-5">
+              <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                  <div class="position-relative h-100">
+                      <img class="position-absolute w-100 h-100 rounded" src="{% static 'images/about.jpg' %}" style="object-fit: cover;">
+                  </div>
+              </div>
+              <div class="col-lg-7">
+                  <div class="mb-1">
+                      <!-- <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5> -->
+                      <h2 class="display-4">Our Mission to Combat Alzheimer's</h2>
+                  </div>
+                  <p>Welcome to our cutting-edge platform, where technology meets healthcare to create a brighter future for those at risk of Alzheimer's Disease. Our mission is to revolutionize the early detection and diagnosis of Alzheimer's through the power of advanced machine learning and artificial intelligence.
+<br><br>
+                    At the core of our project lies a robust predictive model built using Django, harnessing state-of-the-art techniques such as ensemble learning, boosting, and artificial neural networks. By meticulously analyzing over 40 health-related features, we've developed a highly accurate and reliable tool for predicting Alzheimer's Disease.</p>
+                  <div class="row g-3 pt-3">
+                      <div class="col-sm-3 col-6">
+                        <div class="bg-light text-center rounded-circle py-4 circle-size">
+                          <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                          <h6 class="mb-0">Patients <br> Analyzed<small class="d-block text-primary">2,149 records</small></h6>
+                      </div>
+                      
+                      </div>
+                      <div class="col-sm-3 col-6">
+                          <div class="bg-light text-center rounded-circle py-4 circle-size">
+                              <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
+                              <h6 class="mb-0">Features Examined<small class="d-block text-primary">40+ features</small></h6>
+                          </div>
+                      </div>
+                      <div class="col-sm-3 col-6">
+                          <div class="bg-light text-center rounded-circle py-4 circle-size">
+                              <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
+                              <h6 class="mb-0">Model Accuracy<small class="d-block text-primary">97% accuracy</small></h6>
+                          </div>
+                      </div>
+                      <div class="col-sm-3 col-6">
+                          <div class="bg-light text-center rounded-circle py-4 circle-size">
+                              <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
+                              <h6 class="mb-0">Models Used<small class="d-block text-primary">10 advanced <br> models</small></h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- About End -->
+  </section>
+
+  <!-- end feature section -->
+
+  <!-- discount section -->
+
+  <section class="discount_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-5 offset-md-2">
+          <div class="detail-box">
+            <h2>
+              Performance<br>
+              <span>
+                Metrics 
+              </span>
+            </h2>
+          
+              <p> <span style="color: #10E7F4;">Models Trained:</span> 10 advanced models, including an ANN </p>
+              <p> <span style="color: #10E7F4;">Patient Data Evaluated:</span> 500+ records </p>
+              <p> <span style="color: #10E7F4;">Highest Accuracy:</span> 97% on the final model </p>
+              <p> <span style="color: #10E7F4;">Performance Metrics:</span> Precision, Recall, F1 Score, and ROC AUC all between 93-95% </p>
+              <p> <span style="color: #10E7F4;">Features Analyzed:</span> 40+ detailed features </p>
+            
+            <div>
+              <a href="{% url 'modelform' %}">
+                Start Diagnosis
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-5">
+          <div class="img-box">
+            <img src="{% static 'images/alz-removebg-preview.png' %}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- end discount section -->
+
+ 
+
+  <!-- about section -->
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="custom_heading-container ">
+        <h2>
+          About Us
+        </h2>
+      </div>
+
+      <div class="img-box">
+        <img src="{% static 'images/dimen.png' %}" alt="">
+      </div>
+      <div class="detail-box">
+        <p>
+          Welcome to our innovative Alzheimer's prediction platform, where cutting-edge technology meets healthcare excellence. This project harnesses the power of advanced machine learning techniques and deep data analysis to provide accurate predictions and valuable insights into Alzheimer's Disease.
+        </p>
+
+        <p>
+          Utilizing Django, I have meticulously trained and evaluated 10 sophisticated models, including an Artificial Neural Network (ANN), on a comprehensive dataset of over 2000 patient records. Through rigorous analysis of more than 40 detailed features, I achieved an impressive accuracy rate of 97% with the final model. The performance metrics are equally outstanding, with precision, recall, F1 score, and ROC AUC all ranging between 93% and 95%.
+        </p>
+
+        <p>
+          This platform not only demonstrates the power of machine learning but also serves as a crucial tool for early detection and intervention. For those interested in the intricate details of the deep exploratory data analysis and model-building process, the full journey is documented in the link below. Join me in leveraging these advancements to make a significant impact in Alzheimer's research and patient care.
+        </p>
+        <div class="d-flex justify-content-center">
+          <a href="https://www.kaggle.com/code/faizkhan7/alzheimer-s-disease-analysis-and-predictions/notebook#1.-Introduction-and-Understanding-the-Dataset" target="_blank">
+            Check Notebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- client section -->
+  <section class="client_section layout_padding">
+    <div class="container">
+      <div class="custom_heading-container ">
+        <h2>
+          Customer Insights
+        </h2>
+      </div>
+      <div id="carouselExample2Indicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExample2Indicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExample2Indicators" data-slide-to="1"></li>
+          <li data-target="#carouselExample2Indicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="client_container layout_padding2">
+              <div class="client_detail">
+                <p>
+                  "Faiz has demonstrated exceptional dedication and expertise in developing this Alzheimer's prediction model. The extensive effort put into training and evaluating 10 advanced models, including an ANN, is evident in the outstanding accuracy and performance metrics. Faiz’s commitment to thorough data analysis and feature engineering has resulted in a powerful tool that will greatly benefit those seeking early detection and intervention."
+                </p>
+              </div>
+              <div class="client_box ">
+                <div class="img-box">
+                  <img id="clientimg" src="{% static 'images/two.jpeg' %} " alt="">
+                </div>
+                <div class="name">
+                  <h5>
+                    Aarav Patel
+                  </h5>
+                  <h6>
+                    <span>
+                      Client
+                    </span>
+                    <img src="{% static 'images/quote.png' %}" alt="">
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="client_container layout_padding2">
+              <div class="client_detail">
+                <p>
+                  "Faiz’s hard work and meticulous approach are truly commendable. The precision with which he trained and evaluated over 10 sophisticated models, including a high-performing ANN, reflects his deep understanding and commitment. His detailed exploration of more than 40 features and impressive 97% accuracy highlight the dedication and expertise he has poured into this project."
+                </p>
+              </div>
+              <div class="client_box ">
+                <div class="img-box">
+                  <img id="clientimg" src="{% static 'images/three.jpg' %} " alt="">
+                </div>
+                <div class="name">
+                  <h5>
+                    Priya Sharma
+                  </h5>
+                  <h6>
+                    <span>
+                      Client
+                    </span>
+                    <img src="{% static 'images/quote.png' %}" alt="">
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="client_container layout_padding2">
+              <div class="client_detail">
+                <p>
+                  "I am thoroughly impressed by Faiz’s relentless effort and expertise in this project. From training 10 advanced models to achieving a remarkable 97% accuracy, Faiz has shown an extraordinary level of commitment and skill. His extensive work on feature engineering and data analysis is a testament to his dedication. Faiz’s platform is a significant achievement that underscores his hard work and innovative approach to Alzheimer’s prediction."
+                </p>
+              </div>
+              <div class="client_box ">
+                <div class="img-box">
+                  <img id="clientimg" src="{% static 'images/one.jpg' %} " alt="">
+                </div>
+                <div class="name">
+                  <h5>
+                    Ravi Kumar
+                  </h5>
+                  <h6>
+                    <span>
+                      Client
+                    </span>
+                    <img src="{% static 'images/quote.png' %}" alt="">
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+  <!-- end client section -->
+
+  <!-- contact section -->
+  <section class="contact_section">
+    <div class="container">
+      <div class="row">
+        <div class="custom_heading-container ">
+          <h2>
+            Contact Me
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="container layout_padding2">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form_contaier">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputName1">Name</label>
+                <input type="text" class="form-control" id="exampleInputName1">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputNumber1">Phone Number</label>
+                <input type="text" class="form-control" id="exampleInputNumber1">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email </label>
+                <input type="email" class="form-control" id="exampleInputEmail1">
+              </div>
+  
+              <div class="form-group">
+                <label for="exampleInputMessage">Message</label>
+                <input type="text" class="form-control" id="exampleInputMessage">
+              </div>
+              <button type="submit" class="">Send</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="detail-box">
+            <h3>
+              Contact Me Directly
+            </h3>
+            <p>
+            Thank you for your interest in my work! Feel free to explore my projects and contributions on <a href="https://github.com/faizkhan77">Github</a>, <a href="https://www.linkedin.com/in/faiz-khan77/">LinkedIn</a>, and <a href="https://www.kaggle.com/faizkhan7">Kaggle</a>. If you find my work impressive or are interested in collaborating, please don't hesitate to reach out. You can connect with me directly on LinkedIn or contact me via email at <span style="color: blue;">faizkhan.net7@gmail.com</span>. I look forward to hearing from you and exploring potential opportunities together!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; 2024 All Rights Reserved. Designed and Created by
+      <a href="https://faizkhanpy.pythonanywhere.com/" style="color:#2DE5EF">Mohd Faiz Khan</a>
+    </p>
+  </section>
+  <!-- footer section -->
+
+
+  <!-- Social Media icons -->
+  <div class="socials">
+    
+<ul class="example-2">
+  <li class="icon-content">
+    <a
+      href="https://www.linkedin.com/in/faiz-khan77/"
+      aria-label="LinkedIn"
+      data-social="linkedin"
+    >
+      <div class="filled"></div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-linkedin"
+        viewBox="0 0 16 16"
+        xml:space="preserve"
+      >
+        <path
+          d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </a>
+    <div class="tooltip">LinkedIn</div>
+  </li>
+  <li class="icon-content">
+    <a href="https://github.com/faizkhan77" aria-label="GitHub" data-social="github">
+      <div class="filled"></div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-github"
+        viewBox="0 0 16 16"
+        xml:space="preserve"
+      >
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </a>
+    <div class="tooltip">GitHub</div>
+  </li>
+ 
+</ul>
+
+  </div>
+
+<!-- Loader -->
+
+  <div class="loader">
+        
+    <svg class="pl" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="hsl(193,90%,55%)"></stop>
+                <stop offset="100%" stop-color="hsl(223,90%,55%)"></stop>
+            </linearGradient>
+        </defs>
+        <circle class="pl__ring" r="56" cx="64" cy="64" fill="none" stroke="hsla(0,10%,10%,0.1)" stroke-width="16" stroke-linecap="round"></circle>
+        <path class="pl__worm" d="M92,15.492S78.194,4.967,66.743,16.887c-17.231,17.938-28.26,96.974-28.26,96.974L119.85,59.892l-99-31.588,57.528,89.832L97.8,19.349,13.636,88.51l89.012,16.015S81.908,38.332,66.1,22.337C50.114,6.156,36,15.492,36,15.492a56,56,0,1,0,56,0Z" fill="none" stroke="url(#pl-grad)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="44 1111" stroke-dashoffset="10"></path>
+    </svg>
+</div>
+
+
+
+<!-- ------------------------------------- -->
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js">
+  </script>
+  <script type="text/javascript">
+
+
+  window.addEventListener("load", () => {
+          const loader = document.querySelector(".loader");
+
+          // Set a timeout to hide the loader after 3 seconds (3000 milliseconds)
+          setTimeout(() => {
+              loader.classList.add("loader-hidden");
+
+              loader.addEventListener("transitionend", () => {
+                  // Ensure the loader element is removed after the transition
+                  document.body.removeChild(loader);
+              });
+          }, 1000); // 3000 milliseconds = 3 seconds
+      });
+
+
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: true,
+      navText: [],
+      autoplay: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 4
+        }
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    $(".owl-2").owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: true,
+      navText: [],
+      autoplay: true,
+
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 4
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

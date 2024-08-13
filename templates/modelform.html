@@ -1,0 +1,942 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlzheimInsight Prediction</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/abstract_waves_banner_design_1809.jpg' %}");
+            background-size:cover;
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Fix the image in place when scrolling */
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+            padding: 0px 0;
+        }
+        .form-container {
+            background: #10e9f409;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px 40px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 900px;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 430px) {
+            .form-container {
+                width: 100%;
+                border-radius: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+
+            
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            /* font-weight: bold; */
+            /* color: gray; */
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: max(1vw, 13px);
+        }
+        .form-group input[type="range"] {
+            width: calc(100% - 60px);
+            display: inline-block;
+        }
+        .form-group .range-value {
+            width: 50px;
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .advanced-options {
+            display: none;
+            margin-top: 20px;
+            
+        }
+        .toggle-btn {
+            background-color: transparent;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .toggle-btn:hover {
+            background-color: #a3caf5;
+        }
+
+        .form-container h2{
+            font-size: max(2.2vw, 20px);
+        }
+
+        .form-container label{
+            font-size: max(1vw, 15px);
+        }
+
+        .footer_section p{
+            font-size: max(1vw, 10px);
+        }
+        
+
+
+
+
+        /* From Uiverse.io by namecho */ 
+.switch {
+ --button-width: 3.5em;
+ --button-height: 2em;
+ --toggle-diameter: 1.5em;
+ --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
+ --toggle-shadow-offset: 10px;
+ --toggle-wider: 3em;
+ --color-grey: #cccccc;
+ --color-green: #4296f4;
+}
+
+.slider {
+ display: inline-block;
+ width: var(--button-width);
+ height: var(--button-height);
+ background-color: var(--color-grey);
+ border-radius: calc(var(--button-height) / 2);
+ position: relative;
+ transition: 0.3s all ease-in-out;
+}
+
+.slider::after {
+ content: "";
+ display: inline-block;
+ width: var(--toggle-diameter);
+ height: var(--toggle-diameter);
+ background-color: #fff;
+ border-radius: calc(var(--toggle-diameter) / 2);
+ position: absolute;
+ top: var(--button-toggle-offset);
+ transform: translateX(var(--button-toggle-offset));
+ box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+ transition: 0.3s all ease-in-out;
+}
+
+.switch input[type="checkbox"]:checked + .slider {
+ background-color: var(--color-green);
+}
+
+.switch input[type="checkbox"]:checked + .slider::after {
+ transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
+ box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+}
+
+.switch input[type="checkbox"] {
+ display: none;
+}
+
+.switch input[type="checkbox"]:active + .slider::after {
+ width: var(--toggle-wider);
+}
+
+.switch input[type="checkbox"]:checked:active + .slider::after {
+ transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+}
+
+
+
+
+/* Predict Alzheimer's button */
+/* From Uiverse.io by vinodjangid07 */ 
+.button {
+  width: 210px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: #00C8D3;
+  border-radius: 30px;
+  color: rgb(19, 19, 19);
+  font-weight: 600;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+  padding-left: 8px;
+  transition-duration: .5s;
+}
+
+.svgIcon {
+  height: 25px;
+  transition-duration: 1.5s;
+}
+
+.bell path {
+  fill: rgb(19, 19, 19);
+}
+
+.button:hover {
+  background-color: rgb(11, 246, 168);
+  transition-duration: .5s;
+}
+
+.button:active {
+  transform: scale(0.97);
+  transition-duration: .2s;
+}
+
+.button:hover .svgIcon {
+  transform: rotate(250deg);
+  transition-duration: 1.5s;
+}
+
+
+
+
+/* loader */
+/* From Uiverse.io by Bethel-nz */ 
+.loader{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    transition: opacity 0.75s, visibility 0.75s;
+    z-index: 99999;
+}
+.loader-hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+.pl,
+.pl__worm {
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.pl {
+  animation-name: bump9;
+  animation-timing-function: linear;
+  width: 8em;
+  height: 8em;
+}
+
+.pl__ring {
+  stroke: hsla(var(--hue),10%,10%,0.1);
+  transition: stroke 0.3s;
+}
+
+.pl__worm {
+  animation-name: worm9;
+  animation-timing-function: cubic-bezier(0.42,0.17,0.75,0.83);
+}
+
+/* Animations */
+@keyframes bump9 {
+  from,
+  42%,
+  46%,
+  51%,
+  55%,
+  59%,
+  63%,
+  67%,
+  71%,
+  74%,
+  78%,
+  81%,
+  85%,
+  88%,
+  92%,
+  to {
+    transform: translate(0,0);
+  }
+
+  44% {
+    transform: translate(1.33%,6.75%);
+  }
+
+  53% {
+    transform: translate(-16.67%,-0.54%);
+  }
+
+  61% {
+    transform: translate(3.66%,-2.46%);
+  }
+
+  69% {
+    transform: translate(-0.59%,15.27%);
+  }
+
+  76% {
+    transform: translate(-1.92%,-4.68%);
+  }
+
+  83% {
+    transform: translate(9.38%,0.96%);
+  }
+
+  90% {
+    transform: translate(-4.55%,1.98%);
+  }
+}
+
+@keyframes worm9 {
+  from {
+    stroke-dashoffset: 10;
+  }
+
+  25% {
+    stroke-dashoffset: 295;
+  }
+
+  to {
+    stroke-dashoffset: 1165;
+  }
+}
+
+
+
+
+
+
+
+/* CSS */
+.info-box {
+    background-color: #f0f4f8;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.info-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.info-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .info-box {
+        padding: 15px;
+    }
+
+    .info-title {
+        font-size: 20px;
+    }
+
+    .info-text {
+        font-size: 14px;
+    }
+}
+
+    /* Social Icons */ 
+    ul {
+      list-style: none;
+    }
+
+    .example-2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .example-2 .icon-content {
+      margin: 0 10px;
+      position: relative;
+      padding: 0.5rem;
+    }
+    .example-2 .icon-content .tooltip {
+      position: absolute;
+      top: 100%;
+      right: 110%;
+      transform: translateY(200%);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 5px;
+      opacity: 0;
+      visibility: hidden;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .example-2 .icon-content:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      top: -50px;
+    }
+    .example-2 .icon-content a {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #4d4d4d;
+      background-color: #fff;
+      transition: all 0.3s ease-in-out;
+    }
+
+   
+
+    .example-2 .icon-content a:hover {
+      box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+    }
+    .example-2 .icon-content a svg {
+      position: relative;
+      z-index: 1;
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (max-width: 430px) {
+      .example-2 .icon-content a {
+        width: 40px;
+        height: 40px;
+        } 
+        .example-2 .icon-content a svg{
+          width: 20px;
+          height: 20px;
+        }
+    }
+    .example-2 .icon-content a:hover {
+      color: white;
+    }
+    .example-2 .icon-content a .filled {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: #000;
+      transition: all 0.3s ease-in-out;
+    }
+    .example-2 .icon-content a:hover .filled {
+      height: 100%;
+    }
+
+    .example-2 .icon-content a[data-social="linkedin"] .filled,
+    .example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+      background-color: #0274b3;
+    }
+
+    .example-2 .icon-content a[data-social="github"] .filled,
+    .example-2 .icon-content a[data-social="github"] ~ .tooltip {
+      background-color: #24262a;
+    }
+
+    .socials {
+      position: fixed; /* Keeps the element fixed on the screen */
+      bottom: 20px;    /* Positions the element 20px from the bottom */
+      right: 1px;     /* Positions the element 20px from the right */
+      z-index: 1000;   /* Ensures it stays on top of other elements */
+    }
+
+    /* ----------------------------------- */
+
+    </style>
+    <script>
+        function toggleAdvancedOptions() {
+            const advancedOptions = document.querySelector('.advanced-options');
+            const isVisible = advancedOptions.style.display === 'block';
+            advancedOptions.style.display = isVisible ? 'none' : 'block';
+        }
+
+        window.addEventListener("load", () => {
+        const loader = document.querySelector(".loader");
+
+        // Set a timeout to hide the loader after 3 seconds (3000 milliseconds)
+        setTimeout(() => {
+            loader.classList.add("loader-hidden");
+
+            loader.addEventListener("transitionend", () => {
+                // Ensure the loader element is removed after the transition
+                document.body.removeChild(loader);
+            });
+        }, 1000); // 3000 milliseconds = 3 seconds
+    });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  
+</head>
+<body>
+
+   
+
+
+      <!-- header section strats -->
+      <header class="header_section">
+      
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+            <a class="navbar-brand" href="{% url 'index' %}">
+              <img src="{% static 'images/logo.png' %}" alt="">
+              <span>
+                AlzheimInsight
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <!-- <span class="navbar-toggler-icon"></span> -->
+            </button>
+          </nav>
+        </div>
+      </header>
+      <!-- end header section -->
+
+      <!-- HTML -->
+<div class="info-box">
+    <h2 class="info-title">Assess Your Alzheimer's Risk</h2>
+    <p class="info-text">Please provide the necessary details about your age, gender, BMI, lifestyle habits, medical history, clinical measurements, and symptoms. Our model will analyze this information to predict whether you may be at risk for Alzheimer's Disease. This assessment aims to offer you early insights into your health, empowering you to take proactive steps. Your privacy is fully protected throughout the process.</p>
+</div>
+
+
+    <div class="form-container">
+        <!-- <p style="font-size:max(0.5vw, 10px)">
+            
+        </p> -->
+        <h2>Demographic Details</h2>
+        <form id="predictionForm" method="POST" action="{% url 'predict_alzheimers' %}">
+          {% csrf_token %}
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="0" max="120" placeholder="Enter Patient's Age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Please select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ethnicity">Ethnicity</label>
+                <select id="ethnicity" name="ethnicity" required>
+                    <option value="">Please select Ethnicity</option>
+                    <option value="caucasian">Caucasian</option>
+                    <option value="african_american">African American</option>
+                    <option value="asian">Asian</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="education">Education Level</label>
+                <select id="education" name="education" required>
+                    <option value="">Please select Education Level</option>
+                    <option value="none">None</option>
+                    <option value="high_school">High School</option>
+                    <option value="bachelor">Bachelor</option>
+                    <option value="higher">Higher</option>
+                </select>
+            </div>
+
+
+            <h2>Lifestyle Factors</h2>
+            <div class="form-group">
+                <label for="bmi">BMI</label>
+                <input type="number" id="bmi" name="bmi" step="0.1" required placeholder="Enter BMI (e.g., 22.5)">
+            </div>
+            <div class="form-group">
+                <label for="smoking">Smoking</label>
+                <select id="smoking" name="smoking" required>
+                    <option value="">Please select Smoking Status</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="alcohol">Alcohol Consumption (Weekly Alcohol Consumption (0-20 units))</label>
+                <input type="range" id="alcohol" name="alcohol" min="0" max="20" value="10" oninput="document.getElementById('alcohol-value').innerText = this.value">
+                <span class="range-value" id="alcohol-value">0</span>
+            </div>
+            <div class="form-group">
+                <label for="physical_activity">Physical Activity (Weekly Physical Activity (0-10 hours))</label>
+                <input type="range" id="physical_activity" name="physical_activity" min="0" max="10" value="4.92" oninput="document.getElementById('physical_activity-value').innerText = this.value">
+                <span class="range-value" id="physical_activity-value">0</span>
+            </div>
+            <div class="form-group">
+                <label for="diet_quality">Diet Quality (Diet Quality Score (0-10))</label>
+                <input type="range" id="diet_quality" name="diet_quality" min="0" max="10" value="5" oninput="document.getElementById('diet_quality-value').innerText = this.value">
+                <span class="range-value" id="diet_quality-value">0</span>
+            </div>
+            <div class="form-group">
+                <label for="sleep_quality">Sleep Quality (Sleep Quality Score (4-10))</label>
+                <input type="range" id="sleep_quality" name="sleep_quality" min="4" max="10" value="7" oninput="document.getElementById('sleep_quality-value').innerText = this.value">
+                <span class="range-value" id="sleep_quality-value">4</span>
+            </div>
+
+
+            <h2>Medical History</h2>
+            <div class="form-group">
+                <label for="family_history_alzheimers">Do you have a family history of Alzheimer's?</label>
+                <select id="family_history_alzheimers" name="family_history_alzheimers" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cardiovascular_disease">Do you have cardiovascular disease?</label>
+                <select id="cardiovascular_disease" name="cardiovascular_disease" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="diabetes">Do you have diabetes?</label>
+                <select id="diabetes" name="diabetes" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="depression">Do you have depression?</label>
+                <select id="depression" name="depression" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="head_injury">Have you had a head injury?</label>
+                <select id="head_injury" name="head_injury" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="head_injury">Do you have hypertension?</label>
+                <select id="head_injury" name="hypertension" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            
+            <h2>Symptoms</h2>
+            <div class="form-group">
+                <label for="Confusion">Do you experience confusion?</label>
+                <select id="Confusion" name="Confusion" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Disorientation">Do you experience disorientation?</label>
+                <select id="Disorientation" name="Disorientation" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="PersonalityChanges">Have you noticed any personality changes?</label>
+                <select id="PersonalityChanges" name="PersonalityChanges" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="DifficultyCompletingTasks">Do you have difficulty completing tasks?</label>
+                <select id="DifficultyCompletingTasks" name="DifficultyCompletingTasks" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Forgetfulness">Do you experience forgetfulness?</label>
+                <select id="Forgetfulness" name="Forgetfulness" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="memory_complaints">Are you experiencing memory issues?</label>
+                <select id="memory_complaints" name="memory_complaints">
+                    <option value="">Please select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="behavioral_problems">Have there been any behavioral changes?</label>
+                <select id="behavioral_problems" name="behavioral_problems">
+                    <option value="">Please select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+       
+
+
+            <!-- advance options -->
+            <!-- <button type="button" class="toggle-btn" onclick="toggleAdvancedOptions()">Advanced Options 🔽</button> -->
+            
+            <div style="display: flex; justify-content: flex-end; align-items: center; padding: 10px;">
+                <span style="margin-right: 10px; position: relative; top: -2px;">Advance Options</span>
+                <label class="switch" style="display: flex; align-items: center;">
+                    <input type="checkbox" onclick="toggleAdvancedOptions()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            
+
+            <div class="advanced-options">
+                <h2>Advance Options</h2>
+                <div class="form-group">
+                    <label for="mmse">Enter MMSE Score (e.g., 24) – Mini-Mental State Examination score; normal is 24-30</label>
+                    <input type="range" id="mmse" name="mmse" min="0" max="30" value='24' oninput="document.getElementById('mmse-value').innerText = this.value">
+                    <span class="range-value" id="mmse-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="functional_assessment">Enter Functional Assessment Score (e.g., 8) – Measures daily function; normal is 8-10</label>
+                    <input type="range" id="functional_assessment" name="functional_assessment" min="0" max="10" value="8" oninput="document.getElementById('functional-value').innerText = this.value">
+                    <span class="range-value" id="functional-value">0</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adl">Enter ADL Score (e.g., 6) – Activities of Daily Living score; normal is 6-10</label>
+                    <input type="range" id="adl" name="adl" min="0" max="10" value="6" oninput="document.getElementById('adl-value').innerText = this.value">
+                    <span class="range-value" id="adl-value">0</span>
+                </div>
+
+                <!-- Clinical Measurements -->
+                <div class="form-group">
+                    <label for="SystolicBP">Enter Systolic BP (e.g., 120 mmHg) – Pressure during heartbeats, normal range is 90-120 mmHg</label>
+                    <input type="range" id="SystolicBP" name="SystolicBP" min="90" max="180" value="115" oninput="document.getElementById('SystolicBP-value').innerText = this.value">
+                    <span class="range-value" id="SystolicBP-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="DiastolicBP">Enter Diastolic BP (e.g., 80 mmHg) – Pressure between heartbeats, normal range is 60-80 mmHg</label>
+                    <input type="range" id="DiastolicBP" name="DiastolicBP" min="60" max="120" value=70" oninput="document.getElementById('DiastolicBP-value').innerText = this.value">
+                    <span class="range-value" id="DiastolicBP-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="CholesterolTotal">Enter Total Cholesterol (e.g., 200 mg/dL) – Overall cholesterol, healthy level is below 200 mg/dL</label>
+                    <input type="range" id="CholesterolTotal" name="CholesterolTotal" min="150" max="300" value="185" oninput="document.getElementById('CholesterolTotal-value').innerText = this.value">
+                    <span class="range-value" id="CholesterolTotal-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="CholesterolLDL">Enter LDL Cholesterol (e.g., 130 mg/dL) – 'Bad' cholesterol, ideal level is under 130 mg/dL</label>
+                    <input type="range" id="CholesterolLDL" name="CholesterolLDL" min="50" max="200" value="124" oninput="document.getElementById('CholesterolLDL-value').innerText = this.value">
+                    <span class="range-value" id="CholesterolLDL-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="CholesterolHDL">Enter HDL Cholesterol (e.g., 50 mg/dL) – 'Good' cholesterol, optimal level is 40 mg/dL and above</label>
+                    <input type="range" id="CholesterolHDL" name="CholesterolHDL" min="20" max="100" value="59" oninput="document.getElementById('CholesterolHDL-value').innerText = this.value">
+                    <span class="range-value" id="CholesterolHDL-value">0</span>
+                </div>
+                <div class="form-group">
+                    <label for="CholesterolTriglycerides">Enter Triglycerides (e.g., 150 mg/dL) – Fat in the blood, normal level is below 150 mg/dL</label>
+                    <input type="range" id="CholesterolTriglycerides" name="CholesterolTriglycerides" min="50" max="400" value="130" oninput="document.getElementById('CholesterolTriglycerides-value').innerText = this.value">
+                    <span class="range-value" id="CholesterolTriglycerides-value">0</span>
+                </div>
+            </div>
+            <!-- <button type="submit" class="submit-btn">Submit</button> -->
+            
+            <div style="display: flex; justify-content: center;">
+              <button class="button" id="predictButton" type="submit" style="font-size: max(1vw, 15px);margin: 35px 0 35px 0;">
+                  <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
+                  Predict Alzheimer's
+               </button>
+            </div>
+            
+        </form>
+
+        
+        
+    </div>
+
+    
+    
+    
+
+    <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; 2024 All Rights Reserved. Designed and Created by
+      <a href="https://html.design/" style="color:#2DE5EF">Mohd Faiz Khan</a>
+    </p>
+  </section>
+  <!-- footer section -->
+
+
+  <!-- ------------social media icons ------------------ -->
+    <!-- Social Media icons -->
+  <div class="socials">
+    
+    <ul class="example-2">
+      <li class="icon-content">
+        <a
+          href="https://www.linkedin.com/in/faiz-khan77/"
+          aria-label="LinkedIn"
+          data-social="linkedin"
+        >
+          <div class="filled"></div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-linkedin"
+            viewBox="0 0 16 16"
+            xml:space="preserve"
+          >
+            <path
+              d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </a>
+        <div class="tooltip">LinkedIn</div>
+      </li>
+      <li class="icon-content">
+        <a href="https://github.com/faizkhan77" aria-label="GitHub" data-social="github">
+          <div class="filled"></div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-github"
+            viewBox="0 0 16 16"
+            xml:space="preserve"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </a>
+        <div class="tooltip">GitHub</div>
+      </li>
+     
+    </ul>
+    
+      </div>
+
+
+  <!-- ---------- loader ------------ -->
+
+  <div class="loader">
+        
+    <svg class="pl" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="hsl(193,90%,55%)"></stop>
+                <stop offset="100%" stop-color="hsl(223,90%,55%)"></stop>
+            </linearGradient>
+        </defs>
+        <circle class="pl__ring" r="56" cx="64" cy="64" fill="none" stroke="hsla(0,10%,10%,0.1)" stroke-width="16" stroke-linecap="round"></circle>
+        <path class="pl__worm" d="M92,15.492S78.194,4.967,66.743,16.887c-17.231,17.938-28.26,96.974-28.26,96.974L119.85,59.892l-99-31.588,57.528,89.832L97.8,19.349,13.636,88.51l89.012,16.015S81.908,38.332,66.1,22.337C50.114,6.156,36,15.492,36,15.492a56,56,0,1,0,56,0Z" fill="none" stroke="url(#pl-grad)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="44 1111" stroke-dashoffset="10"></path>
+    </svg>
+</div>
+
+
+  <script>
+
+  </script>
+</body>
+</html>
