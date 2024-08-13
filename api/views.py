@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import numpy as np
 import joblib
 import pandas as pd
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Load the trained model
@@ -226,6 +227,7 @@ def prediction():
     return predicted
 
 
+@csrf_exempt
 def predict_alzheimer(request):
 
     global __Age

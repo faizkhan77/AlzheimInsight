@@ -147,4 +147,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # ALLOWED_HOSTS = [".vercel.app"]
 
 # WSGI_APPLICATION = "alzheimer.wsgi.app"
-CSRF_TRUSTED_ORIGINS = ["https://alzheiminsight.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://alzheiminsight.up.railway.app/",
+    "https://alzheiminsight.up.railway.app/prediction/",
+]
