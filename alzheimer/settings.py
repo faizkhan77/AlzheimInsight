@@ -153,3 +153,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "https://alzheiminsight.up.railway.app/",
 #     "https://alzheiminsight.up.railway.app/prediction/",
 # ]
+ALLOWED_HOSTS = ["https://alzheiminsight.onrender.com", "localhost", "127.0.0.1"]
